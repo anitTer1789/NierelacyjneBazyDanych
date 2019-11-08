@@ -25,32 +25,32 @@ public class WeatherController {
 
     @RequestMapping("/")
     public String redirToList() {
-        return "redirect:/weather/list";
+        return "redirect:/weatherstats/list";
     }
 
-    @RequestMapping(value="/weather/list", method = RequestMethod.GET)
+    @RequestMapping(value="/weatherstats/list", method = RequestMethod.GET)
     public String listentrys() {
         return gson.toJson(weatherService.listAll());
     }
 
-    @RequestMapping(value = "/weather/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/weatherstats/{id}", method = RequestMethod.GET)
     public String getWeatherStats(@PathVariable String id) {
         return gson.toJson(weatherService.getStats(UUID.fromString(id)));
     }
 
-    @RequestMapping(value = "/weather", method = RequestMethod.POST)
+    @RequestMapping(value = "/weatherstats", method = RequestMethod.POST)
     Weather createWeatherStat(@RequestBody Weather weather) {
         return weatherService.saveNewStat(weather);
     }
 
-    @RequestMapping(value = "/weather", method = RequestMethod.PUT)
+    @RequestMapping(value = "/weatherstats", method = RequestMethod.PUT)
     Weather updateWeatherStat(@RequestBody Weather weather) {
         return weatherService.saveNewStat(weather);
     }
 
-    @RequestMapping(value = "/weather/{id}", method = RequestMethod.DELETE)
-    void deleteWeatherStat(@PathVariable("ID") UUID ID) {
-        weatherService.deleteStat(ID);
+    @RequestMapping(value = "/weatherstats/{id}", method = RequestMethod.DELETE)
+    void deleteWeatherStat(@PathVariable String id) {
+        weatherService.deleteStat(UUID.fromString(id));
     }
 }
 
