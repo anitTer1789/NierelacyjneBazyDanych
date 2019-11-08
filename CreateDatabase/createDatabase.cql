@@ -1,1 +1,30 @@
+CREATE KEYSPACE IF NOT EXISTS AustraliaWeather
+WITH REPLICATION ={'class':'SimpleStrategy', 'replication_factor' : 3};
 
+CREATE TABLE IF NOT EXISTS AustraliaWeather.weatherstats(
+ID text primary key,
+Date date,
+Location text,
+MinTemp float,
+MaxTemp float,
+Rainfall float,
+Evaporation float,
+Sunshine float,
+WindGustDir text,
+WindGustSpeed int, 
+WindDir9am text, 
+WindDir3pm text, 
+WindSpeed9am int, 
+WindSpeed3pm int, 
+Humidity9am int, 
+Humidity3pm int,
+Pressure9am float,  
+Pressure3pm float, 
+Cloud9am int,  
+Cloud3pm int,
+Temp9am float,   
+Temp3pm float,
+RainToday boolean, 
+RISK_MM float, 
+RainTomorrow boolean,   
+);
