@@ -38,34 +38,29 @@ public class WeatherController {
         this.weatherService = weatherService;
     }
 
-    @RequestMapping("/")
-    public String redirToList() {
-        return "redirect:/weather/list";
+    @RequestMapping(value = "/weather", method = RequestMethod.POST)
+    Weather create(@RequestBody Weather weather) {
+        return weatherService.saveNewStat(weather);
     }
 
-    @RequestMapping(name = "/weather/list")
-    public String listentrys() {
-        return gson.toJson(weatherService.listAll());
+    @RequestMapping(value = "/weather/{ID}", method = RequestMethod.DELETE)
+    void delete(@PathVariable("ID") UUID ID) {
+        weatherService.deleteStat(ID);
     }
 
-    @RequestMapping("/weather/show/{id}")
-    public String getStats(@PathVariable String id) {
-        return gson.toJson(weatherService.getStats(UUID.fromString(id)));
+    @RequestMapping(value="/weather", method = RequestMethod.GET)
+    List<Weather> findAll() {
+        return weatherService.listAll();
     }
 
-
-    @RequestMapping(
-            value = "/weather",
-            method = {RequestMethod.POST, RequestMethod.PUT}
-    )
-    public void saveNewStat(@Valid @RequestBody Weather entry) {
-        weatherService.saveNewStat(entry);
+    @RequestMapping(value = "/weather/{ID}", method = RequestMethod.GET)
+    Weather findById(@PathVariable("ID") UUID ID) {
+        return weatherService.getStats(ID);
     }
 
-    @RequestMapping("/weather/delete/{id}")
-    public String delete(@PathVariable String id) {
-        weatherService.deleteStat(UUID.fromString(id));
-        return "redirect:/weather/list";
+    @RequestMapping(value = "/weather", method = RequestMethod.PUT)
+    Weather update(@RequestBody Weather weather) {
+        return weatherService.saveNewStat(weather);
     }
 }
 

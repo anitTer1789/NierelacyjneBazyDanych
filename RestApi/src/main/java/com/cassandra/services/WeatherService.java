@@ -34,9 +34,9 @@ public class WeatherService implements WeatherServiceInterface {
     }
 
     @Override
-    public Weather saveNewStat(Weather entry) {
-        weatherRepository.save(entry);
-        return entry;
+    public Weather saveNewStat(Weather weather) {
+        weatherRepository.save(weather);
+        return weather;
     }
 
     @Override
